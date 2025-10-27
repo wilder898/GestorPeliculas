@@ -16,6 +16,14 @@ contador_id = 2
 def root():
     return {"mensaje": "¡Bienvenido a mi API con FastAPI!"}
 
+@app.delete("/peliculas/{pelicula_id}")
+def eliminar_pelicula(pelicula_id: int):
+    for i, p in enumerate(lista_peliculas):
+        if p["id"] == pelicula_id:
+            pelicula_eliminada = lista_peliculas.pop(i)
+            return {"mensaje": "Película eliminada", "pelicula": pelicula_eliminada}
+    return {"error": f"Película con ID {pelicula_id} no encontrada"}
+
 # Ejecutar la aplicación
 # uvicorn main:app --reload
 if __name__ == "__main__":
