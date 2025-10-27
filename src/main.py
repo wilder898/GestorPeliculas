@@ -16,6 +16,10 @@ contador_id = 2
 def root():
     return {"mensaje": "¡Bienvenido a mi API con FastAPI!"}
 
+@app.get("/peliculas")
+def listar_peliculas():
+    return {"peliculas": lista_peliculas}
+
 @app.put("/peliculas/{pelicula_id}")
 def actualizar_pelicula(pelicula_id: int, request: dict = Body(...)):
     # Validación manual
@@ -41,3 +45,4 @@ def actualizar_pelicula(pelicula_id: int, request: dict = Body(...)):
 # uvicorn main:app --reload
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
