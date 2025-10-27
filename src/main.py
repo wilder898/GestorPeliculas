@@ -16,7 +16,12 @@ contador_id = 2
 def root():
     return {"mensaje": "¡Bienvenido a mi API con FastAPI!"}
 
+@app.get("/peliculas")
+def listar_peliculas():
+    return {"peliculas": lista_peliculas}
+
 # Ejecutar la aplicación
 # uvicorn main:app --reload
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
