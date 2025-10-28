@@ -12,6 +12,29 @@ lista_peliculas = [
 
 contador_id = 2
 
+@app.post("/peliculas")
+def crear_pelicula(request: dict = Body(...)):
+    global contador_id
+    
+    if "nombre pelicula" not in request or "año" not in request:
+        return {"error": "Faltan campos: nombre y año son requeridos"}
+    
+    nombre = request ["nombre pelicula"]
+    año = request ["año"]
+    director = request ["director"]
+    
+    nueva_pelicula = {
+        "id": contador_id,
+        "nombre pelicula": nombre,
+        "año": año
+    }
+    
+    lista_peliculas.append(nueva_pelicula)
+    contador_id += 1
+    
+    return {"mensaje": "Película creado exitosamente", "usuario": nueva_pelicula}
+
+
 @app.get("/")
 def root():
     return {"mensaje": "¡Bienvenido a mi API con FastAPI!"}
