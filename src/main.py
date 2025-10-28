@@ -26,7 +26,7 @@ def crear_pelicula(request: dict = Body(...)):
     nueva_pelicula = {
         "id": contador_id,
         "nombre pelicula": nombre,
-        "año": año
+        "año": año,
         "director": director
     }
     
@@ -69,5 +69,6 @@ def actualizar_pelicula(pelicula_id: int, request: dict = Body(...)):
 # uvicorn main:app --reload
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
 
 
