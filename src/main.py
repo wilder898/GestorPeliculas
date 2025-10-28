@@ -15,26 +15,28 @@ contador_id = 2
 @app.post("/peliculas")
 def crear_pelicula(request: dict = Body(...)):
     global contador_id
-    
-    if "nombre pelicula" not in request or "año" not in request:
+
+    if "nombre" not in request or "año" not in request:
         return {"error": "Faltan campos: nombre y año son requeridos"}
-    
-    nombre = request ["nombre pelicula"]
-    año = request ["año"]
-    director = request ["director"]
-    
+
+    nombre = request["nombre"]
+    año = request["año"]
+    director = request.get("director", "Desconocido")
+
     nueva_pelicula = {
         "id": contador_id,
-        "nombre pelicula": nombre,
+        "nombre": nombre,
         "año": año,
         "director": director
     }
-    
+
     lista_peliculas.append(nueva_pelicula)
     contador_id += 1
-    
-    return {"mensaje": "Película creado exitosamente", "pelicula": nueva_pelicula}
 
+    return {
+        "mensaje": "Película creada exitosamente",
+        "pelicula": nueva_pelicula
+    }
 
 @app.get("/")
 def root():
