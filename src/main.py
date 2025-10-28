@@ -12,6 +12,30 @@ lista_peliculas = [
 
 contador_id = 2
 
+@app.post("/peliculas")
+def crear_pelicula(request: dict = Body(...)):
+    global contador_id
+    
+    if "nombre pelicula" not in request or "año" not in request:
+        return {"error": "Faltan campos: nombre y año son requeridos"}
+    
+    nombre = request ["nombre pelicula"]
+    año = request ["año"]
+    director = request ["director"]
+    
+    nueva_pelicula = {
+        "id": contador_id,
+        "nombre pelicula": nombre,
+        "año": año,
+        "director": director
+    }
+    
+    lista_peliculas.append(nueva_pelicula)
+    contador_id += 1
+    
+    return {"mensaje": "Película creado exitosamente", "pelicula": nueva_pelicula}
+
+
 @app.get("/")
 def root():
     return {"mensaje": "¡Bienvenido a mi API con FastAPI!"}
@@ -60,4 +84,6 @@ def actualizar_pelicula(pelicula_id: int, request: dict = Body(...)):
 # uvicorn main:app --reload
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
 
